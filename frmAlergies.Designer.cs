@@ -28,18 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbAllergyType = new System.Windows.Forms.ComboBox();
             this.btnAddAllergy = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.chkEnabled = new System.Windows.Forms.CheckBox();
             this.txtAllergyName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAlergies = new System.Windows.Forms.Label();
             this.lblTitle1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmbAllergyType = new System.Windows.Forms.ComboBox();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnClean = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvData
@@ -47,11 +51,14 @@
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Location = new System.Drawing.Point(19, 267);
             this.dgvData.Name = "dgvData";
+            this.dgvData.ReadOnly = true;
             this.dgvData.Size = new System.Drawing.Size(520, 212);
             this.dgvData.TabIndex = 12;
+            this.dgvData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellClick);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnClean);
             this.groupBox1.Controls.Add(this.cmbAllergyType);
             this.groupBox1.Controls.Add(this.btnAddAllergy);
             this.groupBox1.Controls.Add(this.label2);
@@ -65,6 +72,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion general";
             // 
+            // cmbAllergyType
+            // 
+            this.cmbAllergyType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAllergyType.FormattingEnabled = true;
+            this.cmbAllergyType.Items.AddRange(new object[] {
+            "Entorno",
+            "Animal",
+            "Medico"});
+            this.cmbAllergyType.Location = new System.Drawing.Point(23, 82);
+            this.cmbAllergyType.Name = "cmbAllergyType";
+            this.cmbAllergyType.Size = new System.Drawing.Size(165, 21);
+            this.cmbAllergyType.TabIndex = 7;
+            // 
             // btnAddAllergy
             // 
             this.btnAddAllergy.BackColor = System.Drawing.Color.RoyalBlue;
@@ -77,10 +97,22 @@
             this.btnAddAllergy.TabIndex = 6;
             this.btnAddAllergy.Text = "Agregar";
             this.btnAddAllergy.UseVisualStyleBackColor = false;
+            this.btnAddAllergy.Click += new System.EventHandler(this.btnAddAllergy_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(77, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Tipo de alergia";
             // 
             // chkEnabled
             // 
             this.chkEnabled.AutoSize = true;
+            this.chkEnabled.Checked = true;
+            this.chkEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkEnabled.Location = new System.Drawing.Point(374, 41);
             this.chkEnabled.Name = "chkEnabled";
             this.chkEnabled.Size = new System.Drawing.Size(56, 17);
@@ -126,26 +158,24 @@
             this.lblTitle1.TabIndex = 9;
             this.lblTitle1.Text = "Alergias";
             // 
-            // label2
+            // errorProvider
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Tipo de alergia";
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
             // 
-            // cmbAllergyType
+            // btnClean
             // 
-            this.cmbAllergyType.FormattingEnabled = true;
-            this.cmbAllergyType.Items.AddRange(new object[] {
-            "Entorno",
-            "Animal",
-            "Medico"});
-            this.cmbAllergyType.Location = new System.Drawing.Point(23, 82);
-            this.cmbAllergyType.Name = "cmbAllergyType";
-            this.cmbAllergyType.Size = new System.Drawing.Size(165, 21);
-            this.cmbAllergyType.TabIndex = 7;
+            this.btnClean.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnClean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClean.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClean.ForeColor = System.Drawing.Color.White;
+            this.btnClean.Location = new System.Drawing.Point(335, 111);
+            this.btnClean.Name = "btnClean";
+            this.btnClean.Size = new System.Drawing.Size(77, 30);
+            this.btnClean.TabIndex = 8;
+            this.btnClean.Text = "Limpiar";
+            this.btnClean.UseVisualStyleBackColor = false;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
             // frmAlergies
             // 
@@ -159,9 +189,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAlergies";
             this.Text = "frmAlergies";
+            this.Load += new System.EventHandler(this.frmAlergies_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,5 +211,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label btnAlergies;
         private System.Windows.Forms.Label lblTitle1;
+        private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button btnClean;
     }
 }
