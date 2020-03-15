@@ -28,19 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnAlergies = new System.Windows.Forms.Label();
             this.lblTitle1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtDiseaseName = new System.Windows.Forms.TextBox();
-            this.chkCronic = new System.Windows.Forms.CheckBox();
-            this.chkEnabled = new System.Windows.Forms.CheckBox();
+            this.btnAddDisease = new System.Windows.Forms.Button();
             this.txtDiseasePercentage = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnAddDisease = new System.Windows.Forms.Button();
+            this.chkEnabled = new System.Windows.Forms.CheckBox();
+            this.chkCronic = new System.Windows.Forms.CheckBox();
+            this.txtDiseaseName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.dgvData = new System.Windows.Forms.DataGridView();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAlergies
@@ -81,58 +84,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion general";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre:";
-            // 
-            // txtDiseaseName
-            // 
-            this.txtDiseaseName.Location = new System.Drawing.Point(23, 41);
-            this.txtDiseaseName.Name = "txtDiseaseName";
-            this.txtDiseaseName.Size = new System.Drawing.Size(165, 20);
-            this.txtDiseaseName.TabIndex = 1;
-            // 
-            // chkCronic
-            // 
-            this.chkCronic.AutoSize = true;
-            this.chkCronic.Location = new System.Drawing.Point(374, 41);
-            this.chkCronic.Name = "chkCronic";
-            this.chkCronic.Size = new System.Drawing.Size(121, 17);
-            this.chkCronic.TabIndex = 2;
-            this.chkCronic.Text = "Enfermedad cronica";
-            this.chkCronic.UseVisualStyleBackColor = true;
-            // 
-            // chkEnabled
-            // 
-            this.chkEnabled.AutoSize = true;
-            this.chkEnabled.Location = new System.Drawing.Point(374, 77);
-            this.chkEnabled.Name = "chkEnabled";
-            this.chkEnabled.Size = new System.Drawing.Size(56, 17);
-            this.chkEnabled.TabIndex = 3;
-            this.chkEnabled.Text = "Activa";
-            this.chkEnabled.UseVisualStyleBackColor = true;
-            // 
-            // txtDiseasePercentage
-            // 
-            this.txtDiseasePercentage.Location = new System.Drawing.Point(23, 81);
-            this.txtDiseasePercentage.Name = "txtDiseasePercentage";
-            this.txtDiseasePercentage.Size = new System.Drawing.Size(165, 20);
-            this.txtDiseasePercentage.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Porcentaje contagio";
-            // 
             // btnAddDisease
             // 
             this.btnAddDisease.BackColor = System.Drawing.Color.RoyalBlue;
@@ -145,6 +96,60 @@
             this.btnAddDisease.TabIndex = 6;
             this.btnAddDisease.Text = "Agregar";
             this.btnAddDisease.UseVisualStyleBackColor = false;
+            this.btnAddDisease.Click += new System.EventHandler(this.btnAddDisease_Click);
+            // 
+            // txtDiseasePercentage
+            // 
+            this.txtDiseasePercentage.Location = new System.Drawing.Point(23, 81);
+            this.txtDiseasePercentage.Name = "txtDiseasePercentage";
+            this.txtDiseasePercentage.Size = new System.Drawing.Size(165, 20);
+            this.txtDiseasePercentage.TabIndex = 5;
+            this.txtDiseasePercentage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDiseasePercentage_KeyPress);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(102, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Porcentaje contagio";
+            // 
+            // chkEnabled
+            // 
+            this.chkEnabled.AutoSize = true;
+            this.chkEnabled.Location = new System.Drawing.Point(374, 77);
+            this.chkEnabled.Name = "chkEnabled";
+            this.chkEnabled.Size = new System.Drawing.Size(56, 17);
+            this.chkEnabled.TabIndex = 3;
+            this.chkEnabled.Text = "Activa";
+            this.chkEnabled.UseVisualStyleBackColor = true;
+            // 
+            // chkCronic
+            // 
+            this.chkCronic.AutoSize = true;
+            this.chkCronic.Location = new System.Drawing.Point(374, 41);
+            this.chkCronic.Name = "chkCronic";
+            this.chkCronic.Size = new System.Drawing.Size(121, 17);
+            this.chkCronic.TabIndex = 2;
+            this.chkCronic.Text = "Enfermedad cronica";
+            this.chkCronic.UseVisualStyleBackColor = true;
+            // 
+            // txtDiseaseName
+            // 
+            this.txtDiseaseName.Location = new System.Drawing.Point(23, 41);
+            this.txtDiseaseName.Name = "txtDiseaseName";
+            this.txtDiseaseName.Size = new System.Drawing.Size(165, 20);
+            this.txtDiseaseName.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Nombre:";
             // 
             // dgvData
             // 
@@ -153,6 +158,11 @@
             this.dgvData.Name = "dgvData";
             this.dgvData.Size = new System.Drawing.Size(520, 212);
             this.dgvData.TabIndex = 8;
+            this.dgvData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellClick);
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // frmDiseases
             // 
@@ -169,6 +179,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,5 +198,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAddDisease;
         private System.Windows.Forms.DataGridView dgvData;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
