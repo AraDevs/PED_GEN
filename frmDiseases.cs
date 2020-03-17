@@ -57,7 +57,7 @@ namespace PED_GEN
             allDiseases = diseasesconController.getItems();
             dgvData.DataSource = null;
             dgvData.DataSource = allDiseases;
-            hideColumns(4, 8); //preguntar esto
+            hideColumns(4, 9); //preguntar esto
             List<String> headers = new List<string> { "Nombre", "Porcentaje", "Enfermedad cronica", "Estado"};
             renameColumns(headers);
         }
