@@ -182,6 +182,7 @@
             this.Name = "frmPeople";
             this.Text = "frmPeople";
             this.Load += new System.EventHandler(this.frmPeople_Load);
+            this.Enter += new System.EventHandler(this.frmPeople_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

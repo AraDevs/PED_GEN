@@ -12,6 +12,10 @@ namespace PED_GEN.Models
         public string name { get; set; }
         public string dateOfBirth { get; set; }
         public bool deceased { get; set; }
+        public IList<People> sons { get; }
+        public IList<Diseases> diseases { get; }
+        public IList<Allergies> allergies { get; }
+        public People spouse { get; set; }
 
 
         [PrimaryKey]

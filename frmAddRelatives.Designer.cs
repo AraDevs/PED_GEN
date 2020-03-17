@@ -30,13 +30,13 @@
         {
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbSons = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.cmbPartner = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAddDisease = new System.Windows.Forms.Button();
             this.btnAlergies = new System.Windows.Forms.Label();
             this.lblTitle1 = new System.Windows.Forms.Label();
-            this.cmbSons = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +62,27 @@
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion general";
+            // 
+            // cmbSons
+            // 
+            this.cmbSons.FormattingEnabled = true;
+            this.cmbSons.Items.AddRange(new object[] {
+            "Entorno",
+            "Animal",
+            "Medico"});
+            this.cmbSons.Location = new System.Drawing.Point(24, 105);
+            this.cmbSons.Name = "cmbSons";
+            this.cmbSons.Size = new System.Drawing.Size(165, 21);
+            this.cmbSons.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 88);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(25, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Hijo";
             // 
             // cmbPartner
             // 
@@ -90,12 +111,13 @@
             this.btnAddDisease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddDisease.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddDisease.ForeColor = System.Drawing.Color.White;
-            this.btnAddDisease.Location = new System.Drawing.Point(419, 70);
+            this.btnAddDisease.Location = new System.Drawing.Point(421, 96);
             this.btnAddDisease.Name = "btnAddDisease";
             this.btnAddDisease.Size = new System.Drawing.Size(77, 30);
             this.btnAddDisease.TabIndex = 6;
             this.btnAddDisease.Text = "Agregar";
             this.btnAddDisease.UseVisualStyleBackColor = false;
+            this.btnAddDisease.Click += new System.EventHandler(this.btnAddDisease_Click);
             // 
             // btnAlergies
             // 
@@ -119,27 +141,6 @@
             this.lblTitle1.TabIndex = 13;
             this.lblTitle1.Text = "Parientes de {Nombre}";
             // 
-            // cmbSons
-            // 
-            this.cmbSons.FormattingEnabled = true;
-            this.cmbSons.Items.AddRange(new object[] {
-            "Entorno",
-            "Animal",
-            "Medico"});
-            this.cmbSons.Location = new System.Drawing.Point(24, 105);
-            this.cmbSons.Name = "cmbSons";
-            this.cmbSons.Size = new System.Drawing.Size(165, 21);
-            this.cmbSons.TabIndex = 11;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 88);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 13);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Hijo";
-            // 
             // frmAddRelatives
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,6 +153,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAddRelatives";
             this.Text = "Agregar parientes";
+            this.Load += new System.EventHandler(this.frmAddRelatives_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

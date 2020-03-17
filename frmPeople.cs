@@ -44,8 +44,8 @@ namespace PED_GEN
             allPeople = PeopleController.getItems();
             dgvData.DataSource = null;
             dgvData.DataSource = allPeople;
-            hideColumns(3, 8);
-            List<String> headers = new List<string> { "Nombre", "Fecha de nacimiento", "Fallecido" };
+            hideColumns(7, 12);
+            List<String> headers = new List<string> { "Nombre", "Fecha de nacimiento", "Fallecido","Hijos","Enfermedades","Alergias","Conyuge"};
             renameColumns(headers);
         }
 
@@ -68,19 +68,6 @@ namespace PED_GEN
 
         private void dgvData_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 3)
-            {
-                new frmAddRelatives().Show();
-            }
-            if (e.ColumnIndex == 4)
-            {
-                new frmAddAllergies().Show();
-            }
-            if (e.ColumnIndex == 5)
-            {
-                new frmAddDiseases().Show();
-            }
-            
             try
             {
                 int index = e.RowIndex;
@@ -90,7 +77,7 @@ namespace PED_GEN
                     selectedPeople = allPeople[index];
                     //llenamos el formulario con los datos
                     txtPersonName.Text = selectedPeople.name;
-                    dtpPersonBirth.Value =DateTime.Parse(selectedPeople.dateOfBirth);
+                    dtpPersonBirth.Value = DateTime.Parse(selectedPeople.dateOfBirth);
                     chkDiseased.Checked = selectedPeople.deceased;
                     //establecemos el boton en modo modificar
                     btnAddPerson.Text = "Modificar";
@@ -100,6 +87,23 @@ namespace PED_GEN
             {
                 MessageBox.Show("Ocurrio un error al tratar de obtener la alergia seleccionada" + ex);
             }
+
+            if (e.ColumnIndex == 3)
+            {
+                frmAddRelatives relatives = new frmAddRelatives();
+                relatives.Person = selectedPeople;
+                relatives.Show();
+            }
+            if (e.ColumnIndex == 4)
+            {
+                new frmAddDiseases().Show();
+            }
+            if (e.ColumnIndex == 5)
+            {
+                new frmAddAllergies().Show();
+            }
+            
+            
 
         }
 
@@ -164,6 +168,11 @@ namespace PED_GEN
         private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void frmPeople_Enter(object sender, EventArgs e)
+        {
+            fillData();
         }
     }
 }
