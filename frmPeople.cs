@@ -100,7 +100,9 @@ namespace PED_GEN
             }
             if (e.ColumnIndex == 5)
             {
-                new frmAddAllergies().Show();
+                frmAddAllergies allergies = new frmAddAllergies();
+                allergies.Person = selectedPeople;
+                allergies.Show();
             }
             
             

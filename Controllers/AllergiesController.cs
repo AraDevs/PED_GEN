@@ -28,5 +28,9 @@ namespace PED_GEN.Controllers
             return realm.All<Allergies>().ToList();
         }
 
+        public List<Allergies> getActiveItems()
+        {
+            return realm.All<Allergies>().Where(d => d.state).ToList();
+        }
     }
 }

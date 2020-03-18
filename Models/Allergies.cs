@@ -18,5 +18,10 @@ namespace PED_GEN.Models
         //llave primaria por los lulz (puede que sirva despues)
         [PrimaryKey]
         public string id { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

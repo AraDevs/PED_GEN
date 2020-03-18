@@ -92,6 +92,7 @@
             this.btnAddDisease.TabIndex = 6;
             this.btnAddDisease.Text = "Agregar";
             this.btnAddDisease.UseVisualStyleBackColor = false;
+            this.btnAddDisease.Click += new System.EventHandler(this.btnAddDisease_Click);
             // 
             // btnAlergies
             // 
@@ -127,6 +128,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAddAllergies";
             this.Text = "Agregar Alergias";
+            this.Load += new System.EventHandler(this.frmAddAllergies_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
