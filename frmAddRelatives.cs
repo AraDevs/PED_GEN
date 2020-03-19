@@ -74,8 +74,9 @@ namespace PED_GEN
             {
                 allPeople.Remove(a);
             }
+            
             if (spouse == null)
-            {
+            {//Si no hay pareja, elimina todas las personas con pareja
                 //Remueve las personas que ya tienen pareja
                 foreach (People b in allPeople2)
                 {
@@ -83,10 +84,24 @@ namespace PED_GEN
                         allPeople.Remove(b);
                 }
             }
+            else
+            {//Si tiene pareja pero el boton modificar esta activo
+                if (btnAddDisease.Text=="Modificar")
+                {
+                    allPeople.Add(spouse);
+                    //Remueve las personas que ya tienen pareja
+                    foreach (People b in allPeople2)
+                    {
+                        if (b.spouse != null)
+                            allPeople.Remove(b);
+                    }
+                }
+
+            }
             //Remueve los hijos de otras personas
             foreach (People c in allPeople2)
             {
-                if (c.sons!=null)
+                if (c.sons.Count>0)
                 {
                     foreach (People d in c.sons)
                     {
@@ -151,11 +166,37 @@ namespace PED_GEN
             fillData();
             fillComboBoxs();
         }
+        private void changeSpouse(People a, People b)
+        {
+            //iniciamos una transaccion de realm (sin esto no podemos modificar el objeto)
+            var transaction = realm.BeginWrite();
+            a.spouse = null;
+            b.spouse = person;
+            person.spouse = null;
+            person.spouse = b;
+            //guardamos la transaccion
+            transaction.Commit();
+            //Actualiza el objeto spouse en el formulario
+            spouse = b;
+            fillData();
+            fillComboBoxs();
+        }
         private void btnAddDisease_Click(object sender, EventArgs e)
         {
             if (spouse != null)
-            {//Si hay pareja agrega un hijo
-                addRelative(cmbSons.SelectedItem as People, false);
+            {//Si hay pareja
+                if (btnAddDisease.Text == "Modificar") {  
+                    //Si se modificara pareja
+                    changeSpouse(spouse, cmbPartner.SelectedItem as People);
+                    btnAddDisease.Text = "Agregar";
+                    cmbPartner.Visible = false;
+                    label2.Visible = false;
+                    cmbSons.Visible = true;
+                    label1.Visible = true;
+                    //Actualiza combobox
+                    fillComboBoxs();
+                }else//Se agrega un hijo
+                    addRelative(cmbSons.SelectedItem as People, false);
             }
             else
             {//Si no hay pareja la agrega
@@ -168,6 +209,43 @@ namespace PED_GEN
                 label2.Visible = false;
                 cmbPartner.Visible = false;
             }
+        }
+
+        private void dgvData_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dgvData.Rows[e.RowIndex];
+                //Obtiene el nombre de la persona seleccionada
+                string nombre = row.Cells["name"].Value.ToString();
+                //Llena la lista de todas las personas
+                allPeople2 = peopleController.getItems().ToList();
+                //Establece el objeto seleccionado
+                People a = new People();
+                foreach (People item in allPeople2)
+                {
+                    if (nombre == item.name)
+                        a = item;
+                }
+                if (person.spouse.name == a.name)
+                {
+                    label1.Visible = false;
+                    cmbSons.Visible = false;
+                    label2.Visible = true;
+                    cmbPartner.Visible = true;
+                    btnAddDisease.Text = "Modificar";
+                }
+                else
+                {
+                    label1.Visible = true;
+                    cmbSons.Visible = true;
+                    label2.Visible = false;
+                    cmbPartner.Visible = false;
+                }
+                //Actualiza combobox
+                fillComboBoxs();
+            }
+
         }
     }
 }
