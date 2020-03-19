@@ -61,6 +61,7 @@
             // 
             // cmbAllergies
             // 
+            this.cmbAllergies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAllergies.FormattingEnabled = true;
             this.cmbAllergies.Items.AddRange(new object[] {
             "Entorno",

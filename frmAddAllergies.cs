@@ -68,6 +68,20 @@ namespace PED_GEN
             cmbAllergies.DataSource = allergiesList;
         }
 
+        private void addAllergy(Allergies a)
+        {
+            //iniciamos una transaccion de realm (sin esto no podemos modificar el objeto)
+            var transaction = realm.BeginWrite();
+            //actualizamos los campos
+            person.allergies.Add(a);
+
+            //guardamos la transaccion
+            transaction.Commit();
+            fillData();
+            fillComboBox();
+
+        }
+
         private void frmAddAllergies_Load(object sender, EventArgs e)
         {
             
@@ -84,20 +98,6 @@ namespace PED_GEN
                 fillData();
                 fillComboBox();
             }
-        }
-
-        private void addAllergy(Allergies a)
-        {
-            //iniciamos una transaccion de realm (sin esto no podemos modificar el objeto)
-            var transaction = realm.BeginWrite();
-            //actualizamos los campos
-            person.allergies.Add(a);
-
-            //guardamos la transaccion
-            transaction.Commit();
-            fillData();
-            fillComboBox();
-
         }
 
         private void btnAddDisease_Click(object sender, EventArgs e)

@@ -24,5 +24,10 @@ namespace PED_GEN.Controllers
         {
             return realm.All<Diseases>().ToList();
         }
+
+        public List<Diseases> getActiveItems()
+        {
+            return realm.All<Diseases>().Where(d => d.state).ToList();
+        }
     }
 }

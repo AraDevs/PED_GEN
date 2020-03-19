@@ -30,11 +30,11 @@
         {
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbDiseases = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnAddDisease = new System.Windows.Forms.Button();
             this.btnAlergies = new System.Windows.Forms.Label();
             this.lblTitle1 = new System.Windows.Forms.Label();
-            this.cmbDiseases = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +59,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion general";
             // 
+            // cmbDiseases
+            // 
+            this.cmbDiseases.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDiseases.FormattingEnabled = true;
+            this.cmbDiseases.Items.AddRange(new object[] {
+            "Entorno",
+            "Animal",
+            "Medico"});
+            this.cmbDiseases.Location = new System.Drawing.Point(25, 75);
+            this.cmbDiseases.Name = "cmbDiseases";
+            this.cmbDiseases.Size = new System.Drawing.Size(165, 21);
+            this.cmbDiseases.TabIndex = 9;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(22, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(118, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Nombre de enfermedad";
+            // 
             // btnAddDisease
             // 
             this.btnAddDisease.BackColor = System.Drawing.Color.RoyalBlue;
@@ -71,6 +93,7 @@
             this.btnAddDisease.TabIndex = 6;
             this.btnAddDisease.Text = "Agregar";
             this.btnAddDisease.UseVisualStyleBackColor = false;
+            this.btnAddDisease.Click += new System.EventHandler(this.btnAddDisease_Click);
             // 
             // btnAlergies
             // 
@@ -94,27 +117,6 @@
             this.lblTitle1.TabIndex = 9;
             this.lblTitle1.Text = "Enfermedades de {Nombre}";
             // 
-            // cmbDiseases
-            // 
-            this.cmbDiseases.FormattingEnabled = true;
-            this.cmbDiseases.Items.AddRange(new object[] {
-            "Entorno",
-            "Animal",
-            "Medico"});
-            this.cmbDiseases.Location = new System.Drawing.Point(25, 75);
-            this.cmbDiseases.Name = "cmbDiseases";
-            this.cmbDiseases.Size = new System.Drawing.Size(165, 21);
-            this.cmbDiseases.TabIndex = 9;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 58);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Nombre de enfermedad";
-            // 
             // frmAddDiseases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,6 +129,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmAddDiseases";
             this.Text = "Agregar Enfermedades";
+            this.Load += new System.EventHandler(this.frmAddDiseases_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

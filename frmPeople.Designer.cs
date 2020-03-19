@@ -162,6 +162,7 @@
             this.btnEnd.TabIndex = 8;
             this.btnEnd.Text = "Finalizar";
             this.btnEnd.UseVisualStyleBackColor = false;
+            this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
             // 
             // errorProvider
             // 

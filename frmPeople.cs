@@ -96,7 +96,9 @@ namespace PED_GEN
             }
             if (e.ColumnIndex == 4)
             {
-                new frmAddDiseases().Show();
+                frmAddDiseases diseases = new frmAddDiseases();
+                diseases.Person = selectedPeople;
+                diseases.Show();
             }
             if (e.ColumnIndex == 5)
             {
@@ -175,6 +177,11 @@ namespace PED_GEN
         private void frmPeople_Enter(object sender, EventArgs e)
         {
             fillData();
+        }
+
+        private void btnEnd_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("TODO: Generar reporte");
         }
     }
 }

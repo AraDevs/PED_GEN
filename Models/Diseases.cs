@@ -16,5 +16,10 @@ namespace PED_GEN.Models
 
         [PrimaryKey]
         public string id { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }
