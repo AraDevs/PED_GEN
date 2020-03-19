@@ -58,8 +58,8 @@ namespace PED_GEN
 
             dgvData.DataSource = null;
             dgvData.DataSource = relatives;
-            hideColumns(7, 12);
-            List<String> headers = new List<string> { "Nombre", "Fecha de nacimiento", "Fallecido", "Hijos", "Enfermedades", "Alergias", "Conyuge" };
+            hideColumns(3, 12);
+            List<String> headers = new List<string> { "Nombre", "Fecha de nacimiento", "Fallecido"};
             renameColumns(headers);
         }
 
@@ -81,6 +81,17 @@ namespace PED_GEN
                 {
                     if (b.spouse != null)
                         allPeople.Remove(b);
+                }
+            }
+            //Remueve los hijos de otras personas
+            foreach (People c in allPeople2)
+            {
+                if (c.sons!=null)
+                {
+                    foreach (People d in c.sons)
+                    {
+                        allPeople.Remove(d);
+                    }
                 }
             }
             //Elimina a la persona del listado
@@ -124,12 +135,16 @@ namespace PED_GEN
             //iniciamos una transaccion de realm (sin esto no podemos modificar el objeto)
             var transaction = realm.BeginWrite();
             if (b)
-            {
-                person.spouse = a;
+            {//Si agrega pareja, se actualizan ambos registros spouse
                 a.spouse = person;
+                person.spouse = a;
             }
             else
+            {//Si agrega hijo, actualiza el registro de ambos padres
                 person.sons.Add(a);
+                spouse.sons.Add(a);
+            }
+                
 
             //guardamos la transaccion
             transaction.Commit();
