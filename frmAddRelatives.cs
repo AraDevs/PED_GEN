@@ -98,17 +98,21 @@ namespace PED_GEN
                 }
 
             }
-            //Remueve los hijos de otras personas
-            foreach (People c in allPeople2)
-            {
-                if (c.sons.Count>0)
+            if (cmbSons.Visible==true)
+            {//Si el combox hijos esta activo
+                //Remueve los hijos de otras personas
+                foreach (People c in allPeople2)
                 {
-                    foreach (People d in c.sons)
+                    if (c.sons.Count > 0)
                     {
-                        allPeople.Remove(d);
+                        foreach (People d in c.sons)
+                        {
+                            allPeople.Remove(d);
+                        }
                     }
                 }
             }
+            
             //Elimina a la persona del listado
             allPeople.Remove(person);
             //Carga la lista a los combobox
