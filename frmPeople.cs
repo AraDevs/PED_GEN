@@ -63,6 +63,7 @@ namespace PED_GEN
 
         private void frmPeople_Load(object sender, EventArgs e)
         {
+            dtpPersonBirth.MaxDate = DateTime.Now;
             fillData();
         }
 
@@ -85,7 +86,7 @@ namespace PED_GEN
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ocurrio un error al tratar de obtener la alergia seleccionada" + ex);
+                MessageBox.Show("Ocurrio un error al tratar de obtener la persona seleccionada" + ex);
             }
 
             if (e.ColumnIndex == 3)
@@ -182,6 +183,11 @@ namespace PED_GEN
         private void btnEnd_Click(object sender, EventArgs e)
         {
             MessageBox.Show("TODO: Generar reporte");
+        }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            clearForm();
         }
     }
 }

@@ -45,7 +45,9 @@
             // 
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Location = new System.Drawing.Point(24, 266);
+            this.dgvData.MultiSelect = false;
             this.dgvData.Name = "dgvData";
+            this.dgvData.ReadOnly = true;
             this.dgvData.Size = new System.Drawing.Size(520, 212);
             this.dgvData.TabIndex = 16;
             this.dgvData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellClick);
@@ -66,6 +68,7 @@
             // 
             // cmbSons
             // 
+            this.cmbSons.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSons.FormattingEnabled = true;
             this.cmbSons.Items.AddRange(new object[] {
             "Entorno",
@@ -87,6 +90,7 @@
             // 
             // cmbPartner
             // 
+            this.cmbPartner.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPartner.FormattingEnabled = true;
             this.cmbPartner.Items.AddRange(new object[] {
             "Entorno",

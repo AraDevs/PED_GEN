@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnClean = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -70,6 +71,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnClean);
             this.groupBox1.Controls.Add(this.btnAddDisease);
             this.groupBox1.Controls.Add(this.txtDiseasePercentage);
             this.groupBox1.Controls.Add(this.label2);
@@ -155,7 +157,9 @@
             // 
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Location = new System.Drawing.Point(18, 264);
+            this.dgvData.MultiSelect = false;
             this.dgvData.Name = "dgvData";
+            this.dgvData.ReadOnly = true;
             this.dgvData.Size = new System.Drawing.Size(520, 212);
             this.dgvData.TabIndex = 8;
             this.dgvData.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellClick);
@@ -163,6 +167,20 @@
             // errorProvider
             // 
             this.errorProvider.ContainerControl = this;
+            // 
+            // btnClean
+            // 
+            this.btnClean.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnClean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClean.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClean.ForeColor = System.Drawing.Color.White;
+            this.btnClean.Location = new System.Drawing.Point(335, 111);
+            this.btnClean.Name = "btnClean";
+            this.btnClean.Size = new System.Drawing.Size(77, 30);
+            this.btnClean.TabIndex = 7;
+            this.btnClean.Text = "Limpiar";
+            this.btnClean.UseVisualStyleBackColor = false;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
             // frmDiseases
             // 
@@ -199,5 +217,6 @@
         private System.Windows.Forms.Button btnAddDisease;
         private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button btnClean;
     }
 }

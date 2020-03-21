@@ -41,6 +41,7 @@
             this.lblTitle1 = new System.Windows.Forms.Label();
             this.btnEnd = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnClean = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -50,7 +51,9 @@
             // 
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Location = new System.Drawing.Point(24, 235);
+            this.dgvData.MultiSelect = false;
             this.dgvData.Name = "dgvData";
+            this.dgvData.ReadOnly = true;
             this.dgvData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvData.Size = new System.Drawing.Size(520, 212);
             this.dgvData.TabIndex = 16;
@@ -59,6 +62,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnClean);
             this.groupBox1.Controls.Add(this.dtpPersonBirth);
             this.groupBox1.Controls.Add(this.btnAddPerson);
             this.groupBox1.Controls.Add(this.label2);
@@ -78,6 +82,7 @@
             this.dtpPersonBirth.Name = "dtpPersonBirth";
             this.dtpPersonBirth.Size = new System.Drawing.Size(198, 20);
             this.dtpPersonBirth.TabIndex = 7;
+            this.dtpPersonBirth.Value = new System.DateTime(2020, 3, 20, 0, 0, 0, 0);
             // 
             // btnAddPerson
             // 
@@ -169,6 +174,20 @@
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
+            // btnClean
+            // 
+            this.btnClean.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnClean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClean.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClean.ForeColor = System.Drawing.Color.White;
+            this.btnClean.Location = new System.Drawing.Point(335, 111);
+            this.btnClean.Name = "btnClean";
+            this.btnClean.Size = new System.Drawing.Size(77, 30);
+            this.btnClean.TabIndex = 8;
+            this.btnClean.Text = "Limpiar";
+            this.btnClean.UseVisualStyleBackColor = false;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
+            // 
             // frmPeople
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -207,5 +226,6 @@
         private System.Windows.Forms.CheckBox chkDiseased;
         private System.Windows.Forms.Button btnEnd;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Button btnClean;
     }
 }

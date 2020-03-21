@@ -50,6 +50,8 @@ namespace PED_GEN
             txtDiseaseName.Text = "";
             txtDiseasePercentage.Text = "";
             selectedDiseases = null;
+            chkCronic.Checked = false;
+            chkEnabled.Checked = true;
             btnAddDisease.Text = "Agregar";
         }
         private void fillData()
@@ -82,7 +84,16 @@ namespace PED_GEN
             }
             if (errorCount == 0)
             {
-                if (btnAddDisease.Text == "Modificar")
+                
+                try
+                {
+                    if (Convert.ToInt32(txtDiseasePercentage.Text) > 100)
+                    {
+                        MessageBox.Show("No existe porcentaje de contagio mayor al 100%");
+
+                        return;
+                    }
+                    if (btnAddDisease.Text == "Modificar")
                 {
                     var transaction = realm.BeginWrite();
                     selectedDiseases.name = txtDiseaseName.Text;
@@ -99,19 +110,24 @@ namespace PED_GEN
                 }
                 else
                 {
-                    addData(new Diseases
-                    {
-                        name = txtDiseaseName.Text,
-                        percentage = Convert.ToInt32(txtDiseasePercentage.Text),
-                        chronicles = chkCronic.Checked,
-                        state = chkEnabled.Checked,
-                        id = System.Guid.NewGuid().ToString()
-                    });
+                   
+                        addData(new Diseases
+                        {
+                            name = txtDiseaseName.Text,
+                            percentage = Convert.ToInt32(txtDiseasePercentage.Text),
+                            chronicles = chkCronic.Checked,
+                            state = chkEnabled.Checked,
+                            id = System.Guid.NewGuid().ToString()
+                        });
 
                     fillData();
                     clearForm();
                 }
-
+                }
+                catch
+                {
+                    MessageBox.Show("Ingrese un valor entero");
+                }
                 errorProvider.Clear();
                 errorCount = 0;
             }
@@ -145,6 +161,11 @@ namespace PED_GEN
             {
                 errorProvider.SetError(txtDiseasePercentage, "Solo numero");
             } else { errorProvider.SetError(txtDiseasePercentage, ""); }
+        }
+
+        private void btnClean_Click(object sender, EventArgs e)
+        {
+            clearForm();
         }
     }
 }
