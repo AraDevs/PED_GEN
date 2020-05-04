@@ -81,6 +81,9 @@
     <Compile Include="Controllers\AllergiesController.cs" />
     <Compile Include="Controllers\DiseasesController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\ReportDataController.cs" />
+    <Compile Include="ExtModel\DiseasesWithPercentage.cs" />
+    <Compile Include="ExtModel\PeopleWithData.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
