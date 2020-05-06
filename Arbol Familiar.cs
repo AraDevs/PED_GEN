@@ -174,7 +174,7 @@ namespace PED_GEN
             if(person.spouse != null)
             {
                 string s = person.spouse.name.ToString();
-                name[0] += ("\n Esposo/a: " + s);
+                name[0] += ("\n"+ s);
                 NodoPdr(name, posX, posY);
             }
             else

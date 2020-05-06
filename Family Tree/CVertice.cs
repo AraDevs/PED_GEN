@@ -61,8 +61,9 @@ namespace PED_GEN.Controllers
         public CVertice() : this("") { }
         public void DibujarVertice(Graphics g)
         {
+            float a=g.MeasureString(this.Valor, new Font("Times New Roman", 10),0, StringFormat.GenericTypographic).Width+20;
             SolidBrush b = new SolidBrush(this.color_nodo);
-            Rectangle areaNodo = new Rectangle(this._posicion.X - radio, this._posicion.Y - radio, this.Valor.Length*5, 25);
+            Rectangle areaNodo = new Rectangle(this._posicion.X-(int) a/2, this._posicion.Y - radio,(int) a, 30);
             g.FillRectangle(b, areaNodo);
             g.DrawString(this.Valor, new Font("Times New Roman", 10), new SolidBrush(color_fuente), this._posicion.X, this._posicion.Y,
                 new StringFormat()
