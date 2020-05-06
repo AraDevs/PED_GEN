@@ -184,42 +184,44 @@ namespace PED_GEN
         
         private void btnEnd_Click(object sender, EventArgs e)
         {
+            report r = new report();
+            r.Show();
             //listas necesarias
-            ReportDataController rp = new ReportDataController();
-            List<PeopleWithData> pwd = rp.getReportData();
+               ReportDataController rp = new ReportDataController();
+              List<PeopleWithData> pwd = rp.getReportData();
 
             //para cada persona en la lista de todas las personas...
-            foreach(PeopleWithData p in pwd)
-            {
-                string output = "";
-                //imprimir nombre de persona
-                output += p.People.name+"\n";
+             foreach (PeopleWithData p in pwd)
+             {
+               string output = "";
+             //imprimir nombre de persona
+               output += p.People.name+"\n";
 
                 //imprimir todas las enfermedades
-                output += "Padece de las siguientes enfermedades: \n";
-                foreach(Diseases d in p.People.diseases)
-                {
-                    output += d.name + "\n";
-                }
+              output += "Padece de las siguientes enfermedades: \n";
+             foreach (Diseases d in p.People.diseases)
+               {
+               output += d.name + "\n";
+               }
 
-                //imprimir todas las alergias
-                output += "Tambien padece de las siguientes alergias: \n";
-                foreach (Allergies a in p.People.allergies)
-                {
-                    output += a.name + " de tipo "+a.type+"\n";
-                }
+                 //imprimir todas las alergias
+               output += "Tambien padece de las siguientes alergias: \n";
+              foreach (Allergies a in p.People.allergies)
+                 {
+                     output += a.name + " de tipo "+a.type+"\n";
+               }
 
-                //imprimir todas las enfermedades que podria tener la persona
+            //imprimir todas las enfermedades que podria tener la persona
                 output += "En base al arbol genealogico general, tiene las siguientes probabilidades de contraer enfermedades \n";
-                foreach(DiseasesWithPercentage dwp in p.Diseases)
-                {
-                    output += dwp.Name + " con una probabilidad de: " + dwp.Percentage.ToString("#0.00")+"\n";
-                }
+             foreach (DiseasesWithPercentage dwp in p.Diseases)
+               {
+             output += dwp.Name + " con una probabilidad de: " + dwp.Percentage.ToString("#0.00")+"\n";
+              }
 
-                //output de prueba
-                MessageBox.Show(output);
+             //output de prueba
+              MessageBox.Show(output);
 
-            }
+              }
         }
 
         private void btnClean_Click(object sender, EventArgs e)
