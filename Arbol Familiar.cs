@@ -139,8 +139,7 @@ namespace PED_GEN
                     NuevoOrigen = null;
                     NodoDestino = null;
                     Pizarra.Refresh();
-                }
-                
+                }          
                 
 
 
@@ -152,7 +151,6 @@ namespace PED_GEN
             contador++;
             Pizarra.Refresh();
         }
-
 
         #endregion
 
@@ -172,15 +170,27 @@ namespace PED_GEN
             string[] name = person.name.Split(' ');
             string[] hijos= person.sons.Select(x => x.name).ToArray();
 
-            NodoPdr(name, posX, posY);
+            
+            if(person.spouse != null)
+            {
+                string s = person.spouse.name.ToString();
+                name[0] += ("\n Esposo/a: " + s);
+                NodoPdr(name, posX, posY);
+            }
+            else
+            {
+                NodoPdr(name, posX, posY);
+            }
+
+            contador = 0;
 
             foreach (string nombre in hijos)
             {
-                int poshX = Pizarra.Width / person.sons.Count;
-                NodoHj(nombre, poshX* contador, 100);
-                contador++;
-                
+                int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;                
+                NodoHj(nombre, poshX, 100);
+                contador = poshX;
             }
+
             foreach (People son in person.sons)
             {
                 if (son.sons != null)
@@ -195,10 +205,6 @@ namespace PED_GEN
 
                 }
             }
-
-
-
-
         }
     }
 }

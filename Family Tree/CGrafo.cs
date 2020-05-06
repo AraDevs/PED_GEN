@@ -12,6 +12,7 @@ namespace PED_GEN.Controllers
     {
         public List<CVertice> nodos;
         public List<CVertice> hijos;
+
         public CGrafo()
         {
             nodos = new List<CVertice>();
