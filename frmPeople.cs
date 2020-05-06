@@ -226,6 +226,27 @@ namespace PED_GEN
         {
             clearForm();
         }
+
+        private void BtnTree_Click(object sender, EventArgs e)
+        {
+            Arbol_Familiar Afamily = new Arbol_Familiar();
+            try
+            {
+
+                int index = dgvData.CurrentRow.Index;
+
+                if (index >= 0)
+                {
+                    selectedPeople = allPeople[index];
+                    Afamily.Person = selectedPeople;
+                    Afamily.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrio un error al tratar de obtener la persona seleccionada" + ex);
+            }
+        }
     }
 }
 

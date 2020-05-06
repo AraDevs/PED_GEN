@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnClean = new System.Windows.Forms.Button();
             this.dtpPersonBirth = new System.Windows.Forms.DateTimePicker();
             this.btnAddPerson = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,7 +42,7 @@
             this.lblTitle1 = new System.Windows.Forms.Label();
             this.btnEnd = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnClean = new System.Windows.Forms.Button();
+            this.BtnTree = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
@@ -75,6 +76,20 @@
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informacion general";
+            // 
+            // btnClean
+            // 
+            this.btnClean.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnClean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClean.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClean.ForeColor = System.Drawing.Color.White;
+            this.btnClean.Location = new System.Drawing.Point(335, 111);
+            this.btnClean.Name = "btnClean";
+            this.btnClean.Size = new System.Drawing.Size(77, 30);
+            this.btnClean.TabIndex = 8;
+            this.btnClean.Text = "Limpiar";
+            this.btnClean.UseVisualStyleBackColor = false;
+            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
             // 
             // dtpPersonBirth
             // 
@@ -174,25 +189,26 @@
             this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider.ContainerControl = this;
             // 
-            // btnClean
+            // BtnTree
             // 
-            this.btnClean.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnClean.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClean.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClean.ForeColor = System.Drawing.Color.White;
-            this.btnClean.Location = new System.Drawing.Point(335, 111);
-            this.btnClean.Name = "btnClean";
-            this.btnClean.Size = new System.Drawing.Size(77, 30);
-            this.btnClean.TabIndex = 8;
-            this.btnClean.Text = "Limpiar";
-            this.btnClean.UseVisualStyleBackColor = false;
-            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
+            this.BtnTree.BackColor = System.Drawing.Color.RoyalBlue;
+            this.BtnTree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnTree.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnTree.ForeColor = System.Drawing.Color.White;
+            this.BtnTree.Location = new System.Drawing.Point(359, 453);
+            this.BtnTree.Name = "BtnTree";
+            this.BtnTree.Size = new System.Drawing.Size(77, 30);
+            this.BtnTree.TabIndex = 17;
+            this.BtnTree.Text = "Arbol";
+            this.BtnTree.UseVisualStyleBackColor = false;
+            this.BtnTree.Click += new System.EventHandler(this.BtnTree_Click);
             // 
             // frmPeople
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 488);
+            this.Controls.Add(this.BtnTree);
             this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.dgvData);
             this.Controls.Add(this.groupBox1);
@@ -227,5 +243,6 @@
         private System.Windows.Forms.Button btnEnd;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button btnClean;
+        private System.Windows.Forms.Button BtnTree;
     }
 }
