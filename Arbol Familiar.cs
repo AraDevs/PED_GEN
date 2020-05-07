@@ -108,10 +108,6 @@ namespace PED_GEN
                 Pizarra.Refresh();
                 nuevoNodo.DibujarVertice(Pizarra.CreateGraphics());
             }
-            if ((NuevoOrigen = grafo.DetectarPunto(new Point(50, 50))) != null)
-            {
-                var_control = 1;
-            }
             if (nuevoNodo != null && NuevoOrigen == null)
             {
                 
@@ -180,12 +176,21 @@ namespace PED_GEN
 
             contador = 0; int con = 0;
 
-            foreach (string nombre in hijos)
+            //foreach (string nombre in hijos)
+            //{
+            //    //string n = Espo(nombre, person.name);
+            //    int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;
+            //    con++;
+            //    NodoHj(nombre, poshX, 100);
+            //    contador = poshX;
+            //}
+            foreach(People nombre in person.sons)
             {
-                string n = Espo(nombre, person.name);
+                string Nom = nombre.name;
                 int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;
                 con++;
-                NodoHj(n, poshX, 100);
+                 NodoHj(Namespo(nombre), poshX, 100);
+                
                 contador = poshX;
             }
 
@@ -195,42 +200,58 @@ namespace PED_GEN
                 {
                     contador = 0;
                     int poshX = Pizarra.Width / 2;
-                    Nodo = grafo.BuscarVertice(son.name);
+                    Nodo = grafo.BuscarVertice(Namespo(son));
                     foreach (People s in son.sons)
                     {
-                        NodoHj(s.name, poshX * contador, 200);
+                        
+                            NodoHj(Namespo(s), poshX * contador, 200);
+                        
+                        
                     }
                 }
             }
         }
-        string Espo(string n, string p)
+        //string Espo(string n, pelo p)
+        //{
+        //    People selectedP;
+        //    List<People> allPeople = new List<People>();
+        //    string[] name = person.name.Split(' ');
+        //    int count = 0;
+        //    while (n != name[count])
+        //    {
+        //        count++;
+        //    }
+
+        //    selectedP = allPeople[count];            
+        //    Person = selectedP;
+        //    count = 0;
+        //    if (person.spouse != null)
+        //    {
+        //        n += ("\n" + person.spouse.name);
+        //    }
+
+        //    while (p != name[count])
+        //    {
+        //        count++;
+        //    }
+
+        //    selectedP = allPeople[count];
+        //    Person = selectedP;
+
+        //    return n;
+        //}
+        string Namespo(People persona)
         {
-            People selectedP;
-            List<People> allPeople = new List<People>();
-            string[] name = person.name.Split(' ');
-            int count = 0;
-            while (n != name[count])
+            if(persona.spouse!=null)
             {
-                count++;
+                string nombre = persona.name + "\n" + persona.spouse;
+                return nombre;
             }
+            return persona.name;
+        }
+        void PeopleSon(People son,People father)
+        {
 
-            selectedP = allPeople[count];            
-            Person = selectedP;
-            count = 0;
-            if (person.spouse != null)
-            {
-                n += ("\n" + person.spouse.name);
-            }
-
-            while (p != name[count])
-            {
-                count++;
-            }
-
-            selectedP = allPeople[count];
-            Person = selectedP;
-
-            return n;
         }
     }
 }
