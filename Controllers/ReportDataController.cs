@@ -41,7 +41,7 @@ namespace PED_GEN.Controllers
                             if (dwp.Name.Equals(d.name))
                             {
                                 flag = true;
-                                dwp.Percentage += (d.percentage * aleatoryVariation(0.002,0.004)) * total * 100;
+                                dwp.Percentage += (d.percentage * aleatoryVariation(0.005,0.01)) * total * 100;
                             }
                         }
                         if (!flag)

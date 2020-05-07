@@ -50,5 +50,22 @@ namespace PED_GEN
         {
             ShowChildForm(new frmPeople());
         }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            string output = "";
+            output += "Herramienta de historial medico familiar\n\n";
+            output += "Desarrollada por: \n";
+            output += "Herrera Guardado, Carlos David - HG190072\n";
+            output += "Abrego Herrera, Giovanny Misael - AH132090\n";
+            output += "Méndez Argueta, Oscar Ernesto - MA171622\n";
+            output += "Sura Jiménez, Victoria Margarita - SJ190060\n";
+            output += "Rivas Cerón, Rodrigo Fernando - RC180650\n\n";
+            output += "-------------------------------------------------------------\n";
+            output += "Universidad Don Bosco, Ing. C.C 2020";
+
+            MessageBox.Show(output);
+
+        }
     }
 }

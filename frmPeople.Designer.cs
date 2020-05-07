@@ -176,11 +176,11 @@
             this.btnEnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEnd.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEnd.ForeColor = System.Drawing.Color.White;
-            this.btnEnd.Location = new System.Drawing.Point(467, 453);
+            this.btnEnd.Location = new System.Drawing.Point(367, 453);
             this.btnEnd.Name = "btnEnd";
-            this.btnEnd.Size = new System.Drawing.Size(77, 30);
+            this.btnEnd.Size = new System.Drawing.Size(177, 30);
             this.btnEnd.TabIndex = 8;
-            this.btnEnd.Text = "Finalizar";
+            this.btnEnd.Text = "Generar reporte medico";
             this.btnEnd.UseVisualStyleBackColor = false;
             this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
             // 
@@ -195,7 +195,7 @@
             this.BtnTree.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnTree.Font = new System.Drawing.Font("Lucida Sans", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnTree.ForeColor = System.Drawing.Color.White;
-            this.BtnTree.Location = new System.Drawing.Point(359, 453);
+            this.BtnTree.Location = new System.Drawing.Point(284, 453);
             this.BtnTree.Name = "BtnTree";
             this.BtnTree.Size = new System.Drawing.Size(77, 30);
             this.BtnTree.TabIndex = 17;
