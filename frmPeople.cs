@@ -256,21 +256,35 @@ namespace PED_GEN
             FolderBrowserDialog folderDlg = new FolderBrowserDialog();
             folderDlg.ShowNewFolderButton = true;
             // Show the FolderBrowserDialog.  
-            DialogResult result = folderDlg.ShowDialog();
+            /*DialogResult result = folderDlg.ShowDialog();
             if (result == DialogResult.OK)
             {
                 try
                 {
-                    doc.SaveToFile(folderDlg.SelectedPath + "/Reporte.pdf", FileFormat.PDF);
+                    doc.SaveToFile(folderDlg.SelectedPath + "/ReporteFamiliar.pdf", FileFormat.PDF);
                     MessageBox.Show("El documento ha sido almacenado en: " + folderDlg.SelectedPath + "/Reporte.pdf");
                 }
                 catch
                 {
                     MessageBox.Show("No fue posible guardar el PDF, es posible que se encuentre abierto por otra aplicacion");
                 }
+            }*/
+
+            SaveFileDialog sf = new SaveFileDialog();
+            sf.Filter = "PDF Document (.pdf)|*.pdf";
+            sf.Title = "Guardar reporte en...";
+            sf.FileName = "Reporte familiar";
+            sf.ShowDialog();
+            try
+            {
+                doc.SaveToFile(sf.FileName, FileFormat.PDF);
+                System.Diagnostics.Process.Start(sf.FileName);
+            }
+            catch
+            {
+                MessageBox.Show("No fue posible guardar el PDF, es posible que se encuentre abierto por otra aplicacion o que cancelara la creacion del mismo");
             }
             
-
         }
 
         private void btnClean_Click(object sender, EventArgs e)

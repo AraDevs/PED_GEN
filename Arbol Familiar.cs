@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using PED_GEN.Controllers;
 using PED_GEN.Models;
 using PED_GEN.RealmConnection;
+using System.Drawing.Imaging;
 
 namespace PED_GEN
 {
@@ -234,6 +235,20 @@ namespace PED_GEN
 
 
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int width = Pizarra.Size.Width;
+            int height = Pizarra.Size.Height;
+
+            Bitmap bm = new Bitmap(width, height);
+            Pizarra.DrawToBitmap(bm, new Rectangle(0, 0, width, height));
+            SaveFileDialog sf = new SaveFileDialog();
+            sf.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|Png Image (.png)|*.png|Tiff Image (.tiff)|*.tiff|Wmf Image (.wmf)|*.wmf";
+            sf.ShowDialog();
+            var path = sf.FileName;
+            bm.Save(path, ImageFormat.Png);
         }
     }
 }
