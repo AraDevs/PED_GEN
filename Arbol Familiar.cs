@@ -30,6 +30,7 @@ namespace PED_GEN
         private CVertice NuevoOrigen;
         private CVertice NodoDestino;
         private int var_control = 0;
+        int contadorY = 1;
         int contador = 0;
         internal People Person { get => person; set => person = value; }
         public Arbol_Familiar()
@@ -86,11 +87,11 @@ namespace PED_GEN
 
                 var_control = 0;
                 Pizarra.Refresh();
-                
+
             }
-            
+
         }
-        public void NodoHj(string name,int posX,int posY)
+        public void NodoHj(string name, int posX, int posY)
         {
             nuevoNodo = new CVertice();
             var_control = 2;
@@ -108,43 +109,39 @@ namespace PED_GEN
                 Pizarra.Refresh();
                 nuevoNodo.DibujarVertice(Pizarra.CreateGraphics());
             }
-            if ((NuevoOrigen = grafo.DetectarPunto(new Point(50, 50))) != null)
-            {
-                var_control = 1;
-            }
             if (nuevoNodo != null && NuevoOrigen == null)
             {
-                
+
                 grafo.AgregarVertice(nuevoNodo);
                 nuevoNodo.Valor = name;
-                    
-                    
-                    //nuevoNodo = null;
-                    var_control = 0;
-                    Pizarra.Refresh();
+
+
+                //nuevoNodo = null;
+                var_control = 0;
+                Pizarra.Refresh();
 
                 if (nuevoNodo != null)
                 {
 
                     grafo.AgregarVertice(nuevoNodo);
 
-                    
-                        nuevoNodo.Valor = name;
-                        if ((NodoDestino = grafo.DetectarPunto(new Point(posX, posY))) != null && NuevoOrigen != NodoDestino)
-                        {
+
+                    nuevoNodo.Valor = name;
+                    if ((NodoDestino = grafo.DetectarPunto(new Point(posX, posY))) != null && NuevoOrigen != NodoDestino)
+                    {
                         grafo.AgregarArco(Nodo, NodoDestino);
-                        }
-                    
+                    }
+
                     var_control = 0;
                     NuevoOrigen = null;
                     NodoDestino = null;
                     Pizarra.Refresh();
-                }          
-                
+                }
+
 
 
             }
-            
+
 
             nuevoNodo = null;
             var_control = 0;
@@ -163,47 +160,79 @@ namespace PED_GEN
 
         private void Arbol_Familiar_Load(object sender, EventArgs e)
         {
-            
+
             int posX = Pizarra.Width / 2;
-            
+
             int posY = 50;
             string[] name = person.name.Split(' ');
-            string[] hijos= person.sons.Select(x => x.name).ToArray();
+            string[] hijos = person.sons.Select(x => x.name).ToArray();
 
-            
-            if(person.spouse != null)
+            if (person.spouse != null)
             {
                 string s = person.spouse.name.ToString();
-                name[0] += ("\n Esposo/a: " + s);
-                NodoPdr(name, posX, posY);
-            }
-            else
-            {
-                NodoPdr(name, posX, posY);
+                name[0] += ("\n" + s);
             }
 
-            contador = 0;
+            NodoPdr(name, posX, posY);
+            contador = 0; int con = 0;
+            int[] posH = new int[person.sons.Count];
 
-            foreach (string nombre in hijos)
+            foreach (People nombre in person.sons)
             {
-                int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;                
-                NodoHj(nombre, poshX, 100);
+                //string Nom = nombre.name;
+                int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;
+
+                posH[con] = poshX;
+                NodoHj(Namespo(nombre), poshX, 100);
+                con++;
                 contador = poshX;
             }
-
+            con = 0; contador = 0;
             foreach (People son in person.sons)
             {
                 if (son.sons != null)
                 {
-                    contador = 0;
-                    int poshX = Pizarra.Width / 2;
-                    Nodo = grafo.BuscarVertice(son.name);
+                    Nodo = grafo.BuscarVertice(Namespo(son));
                     foreach (People s in son.sons)
                     {
-                        NodoHj(s.name, poshX * contador, 200);
+                        int poshX = (posH[0] / (s.sons.Count + 1)) + contador;
+                        contador += poshX;
+                        NodoHj(Namespo(s), poshX, 200);
+                    }
+                }
+                con++;
+            }
+
+            string Namespo(People persona)
+            {
+                if (persona.spouse != null)
+                {
+                    string nombre = persona.name + "\n" + persona.spouse;
+                    return nombre;
+                }
+                return persona.name;
+            }
+            void PeopleSon(People son, People father, int x)
+            {
+
+                Nodo = grafo.BuscarVertice(Namespo(father));
+                NodoHj(Namespo(son), x, 100 * contadorY);
+                contadorY++;
+                if (son.sons.Count > 0)
+                {
+                    foreach (People s in son.sons)
+                    {
+                        contador = x;
+                        int poshX = (Pizarra.Width / (son.sons.Count + 1)) + contador;
+                        PeopleSon(s, son, poshX);
+
+
                     }
 
                 }
+
+
+
             }
         }
     }
