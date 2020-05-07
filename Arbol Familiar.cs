@@ -173,73 +173,35 @@ namespace PED_GEN
             }
 
             NodoPdr(name, posX, posY);
-
             contador = 0; int con = 0;
+            int[] posH = new int[person.sons.Count];
 
-            //foreach (string nombre in hijos)
-            //{
-            //    //string n = Espo(nombre, person.name);
-            //    int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;
-            //    con++;
-            //    NodoHj(nombre, poshX, 100);
-            //    contador = poshX;
-            //}
-            foreach(People nombre in person.sons)
+            foreach (People nombre in person.sons)
             {
                 string Nom = nombre.name;
                 int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;
+                posH[con] = poshX;
+                NodoHj(Namespo(nombre), poshX, 100);
                 con++;
-                 NodoHj(Namespo(nombre), poshX, 100);
-                
                 contador = poshX;
             }
-
+            con = 0; contador = 0;
             foreach (People son in person.sons)
-            {
+            {                
                 if (son.sons != null)
-                {
-                    contador = 0;
-                    int poshX = Pizarra.Width / 2;
-                    Nodo = grafo.BuscarVertice(Namespo(son));
+                {                                         
+                    Nodo = grafo.BuscarVertice(Namespo(son));                    
                     foreach (People s in son.sons)
-                    {
-                        
-                            NodoHj(Namespo(s), poshX * contador, 200);
-                        
-                        
+                    {                        
+                        int poshX = (posH[0] / (s.sons.Count + 1)) + contador;
+                        contador += poshX;
+                        NodoHj(Namespo(s), poshX, 200);                                                
                     }
                 }
+                con++;
             }
         }
-        //string Espo(string n, pelo p)
-        //{
-        //    People selectedP;
-        //    List<People> allPeople = new List<People>();
-        //    string[] name = person.name.Split(' ');
-        //    int count = 0;
-        //    while (n != name[count])
-        //    {
-        //        count++;
-        //    }
-
-        //    selectedP = allPeople[count];            
-        //    Person = selectedP;
-        //    count = 0;
-        //    if (person.spouse != null)
-        //    {
-        //        n += ("\n" + person.spouse.name);
-        //    }
-
-        //    while (p != name[count])
-        //    {
-        //        count++;
-        //    }
-
-        //    selectedP = allPeople[count];
-        //    Person = selectedP;
-
-        //    return n;
-        //}
+       
         string Namespo(People persona)
         {
             if(persona.spouse!=null)
