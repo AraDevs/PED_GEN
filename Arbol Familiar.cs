@@ -169,25 +169,23 @@ namespace PED_GEN
             int posY = 50;
             string[] name = person.name.Split(' ');
             string[] hijos= person.sons.Select(x => x.name).ToArray();
-
-            
+                        
             if(person.spouse != null)
             {
                 string s = person.spouse.name.ToString();
-                name[0] += ("\n"+ s);
-                NodoPdr(name, posX, posY);
-            }
-            else
-            {
-                NodoPdr(name, posX, posY);
+                name[0] += ("\n"+ s);                
             }
 
-            contador = 0;
+            NodoPdr(name, posX, posY);
+
+            contador = 0; int con = 0;
 
             foreach (string nombre in hijos)
             {
-                int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;                
-                NodoHj(nombre, poshX, 100);
+                string n = Espo(nombre, person.name);
+                int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;
+                con++;
+                NodoHj(n, poshX, 100);
                 contador = poshX;
             }
 
@@ -202,9 +200,37 @@ namespace PED_GEN
                     {
                         NodoHj(s.name, poshX * contador, 200);
                     }
-
                 }
             }
+        }
+        string Espo(string n, string p)
+        {
+            People selectedP;
+            List<People> allPeople = new List<People>();
+            string[] name = person.name.Split(' ');
+            int count = 0;
+            while (n != name[count])
+            {
+                count++;
+            }
+
+            selectedP = allPeople[count];            
+            Person = selectedP;
+            count = 0;
+            if (person.spouse != null)
+            {
+                n += ("\n" + person.spouse.name);
+            }
+
+            while (p != name[count])
+            {
+                count++;
+            }
+
+            selectedP = allPeople[count];
+            Person = selectedP;
+
+            return n;
         }
     }
 }
