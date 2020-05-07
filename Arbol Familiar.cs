@@ -30,6 +30,7 @@ namespace PED_GEN
         private CVertice NuevoOrigen;
         private CVertice NodoDestino;
         private int var_control = 0;
+        int contadorY = 1;
         int contador = 0;
         internal People Person { get => person; set => person = value; }
         public Arbol_Familiar()
@@ -186,30 +187,31 @@ namespace PED_GEN
             //}
             foreach(People nombre in person.sons)
             {
-                string Nom = nombre.name;
+                //string Nom = nombre.name;
                 int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;
-                con++;
-                 NodoHj(Namespo(nombre), poshX, 100);
-                
+                //con++;
+                // NodoHj(Namespo(nombre), poshX, 100);
+                PeopleSon(nombre, person, poshX);
+                contadorY = 1;
                 contador = poshX;
             }
 
-            foreach (People son in person.sons)
-            {
-                if (son.sons != null)
-                {
-                    contador = 0;
-                    int poshX = Pizarra.Width / 2;
-                    Nodo = grafo.BuscarVertice(Namespo(son));
-                    foreach (People s in son.sons)
-                    {
+            //foreach (People son in person.sons)
+            //{
+            //    if (son.sons != null)
+            //    {
+            //        contador = 0;
+            //        int poshX = Pizarra.Width / 2;
+            //        Nodo = grafo.BuscarVertice(Namespo(son));
+            //        foreach (People s in son.sons)
+            //        {
                         
-                            NodoHj(Namespo(s), poshX * contador, 200);
+            //                NodoHj(Namespo(s), poshX * contador, 200);
                         
                         
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
         }
         //string Espo(string n, pelo p)
         //{
@@ -249,8 +251,26 @@ namespace PED_GEN
             }
             return persona.name;
         }
-        void PeopleSon(People son,People father)
+        void PeopleSon(People son,People father,int x)
         {
+
+            Nodo = grafo.BuscarVertice(Namespo(father));
+            NodoHj(Namespo(son),x, 100*contadorY);
+            contadorY++;
+            if (son.sons.Count>0)
+            {
+                foreach(People s in son.sons)
+                {
+                    contador = x;
+                    int poshX = (Pizarra.Width / (son.sons.Count + 1)) + contador;
+                    PeopleSon(s, son,poshX);
+                    
+                    
+                }
+                
+            }
+                
+            
 
         }
     }
