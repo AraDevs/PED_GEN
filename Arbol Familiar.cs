@@ -178,12 +178,13 @@ namespace PED_GEN
 
             NodoPdr(name, posX, posY);
 
-            contador = 0; 
+            contador = 0; int con = 0;
 
             foreach (string nombre in hijos)
             {
+                string n = Espo(nombre, person.name);
                 int poshX = (Pizarra.Width / (person.sons.Count + 1)) + contador;
-                string n = nombre;                
+                con++;
                 NodoHj(n, poshX, 100);
                 contador = poshX;
             }
@@ -201,7 +202,36 @@ namespace PED_GEN
                     }
                 }
             }
-        }        
+        }
+        string Espo(string n, string p)
+        {
+            People selectedP;
+            List<People> allPeople = new List<People>();
+            string[] name = person.name.Split(' ');
+            int count = 0;
+            while (n != name[count])
+            {
+                count++;
+            }
+
+            selectedP = allPeople[count];            
+            Person = selectedP;
+            count = 0;
+            if (person.spouse != null)
+            {
+                n += ("\n" + person.spouse.name);
+            }
+
+            while (p != name[count])
+            {
+                count++;
+            }
+
+            selectedP = allPeople[count];
+            Person = selectedP;
+
+            return n;
+        }
     }
 }
 
