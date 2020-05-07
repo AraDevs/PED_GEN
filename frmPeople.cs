@@ -3,6 +3,8 @@ using PED_GEN.ExtModel;
 using PED_GEN.Models;
 using PED_GEN.RealmConnection;
 using Realms;
+using Spire.Pdf;
+using Spire.Pdf.Graphics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -189,37 +191,86 @@ namespace PED_GEN
             List<PeopleWithData> pwd = rp.getReportData();
 
             //para cada persona en la lista de todas las personas...
-            foreach(PeopleWithData p in pwd)
+            string output = "------------------------------------------------------------------------------------------------------------------------------------------\n";
+            foreach (PeopleWithData p in pwd)
             {
-                string output = "";
+                
                 //imprimir nombre de persona
-                output += p.People.name+"\n";
+                output +=">>"+p.People.name+"\n";
 
                 //imprimir todas las enfermedades
-                output += "Padece de las siguientes enfermedades: \n";
+                output += "-Padece de las siguientes enfermedades: \n";
                 foreach(Diseases d in p.People.diseases)
                 {
-                    output += d.name + "\n";
+                    output += "\t->"+d.name + "\n";
                 }
 
                 //imprimir todas las alergias
-                output += "Tambien padece de las siguientes alergias: \n";
+                output += "-Tambien padece de las siguientes alergias: \n";
                 foreach (Allergies a in p.People.allergies)
                 {
-                    output += a.name + " de tipo "+a.type+"\n";
+                    output += "\t->" + a.name + " de tipo "+a.type+"\n";
                 }
 
                 //imprimir todas las enfermedades que podria tener la persona
-                output += "En base al arbol genealogico general, tiene las siguientes probabilidades de contraer enfermedades \n";
+                output += "-En base al arbol genealogico general, tiene las siguientes probabilidades de contraer enfermedades \n";
                 foreach(DiseasesWithPercentage dwp in p.Diseases)
                 {
-                    output += dwp.Name + " con una probabilidad de: " + dwp.Percentage.ToString("#0.00")+"\n";
+                    output += "\t->" + dwp.Name + " con una probabilidad de: " + dwp.Percentage.ToString("#0.00")+"\n";
                 }
-
+                output += "------------------------------------------------------------------------------------------------------------------------------------------\n";
                 //output de prueba
-                MessageBox.Show(output);
+                //MessageBox.Show(output);
 
             }
+            printPDF(output);
+        }
+
+        private void printPDF(string text)
+        {
+            PdfDocument doc = new PdfDocument();
+            PdfSection section = doc.Sections.Add();
+            PdfPageBase page = section.Pages.Add();
+            PdfFont font = new PdfFont(PdfFontFamily.Helvetica, 11);
+            PdfFont font2 = new PdfFont(PdfFontFamily.Helvetica, 20);
+            PdfStringFormat format = new PdfStringFormat();
+            format.LineSpacing = 20f;
+            PdfBrush brush = PdfBrushes.Black;
+            PdfTextWidget textWidget = new PdfTextWidget(text, font, brush);
+            PdfTextWidget textWidget2 = new PdfTextWidget("Historial Medico Familiar.", font2, brush);
+
+            float y = 0;
+            float y2 = 35;
+            PdfTextLayout textLayout = new PdfTextLayout();
+            textLayout.Break = PdfLayoutBreakType.FitPage;
+            textLayout.Layout = PdfLayoutType.Paginate;
+            //limites de header
+            RectangleF bounds = new RectangleF(new PointF(0, y), page.Canvas.ClientSize);
+            //limites para la lista
+            RectangleF bounds2 = new RectangleF(new PointF(0, y2), page.Canvas.ClientSize);
+            textWidget.StringFormat = format;
+            textWidget2.Draw(page, bounds, textLayout);
+            textWidget.Draw(page, bounds2, textLayout);
+
+
+            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+            folderDlg.ShowNewFolderButton = true;
+            // Show the FolderBrowserDialog.  
+            DialogResult result = folderDlg.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                try
+                {
+                    doc.SaveToFile(folderDlg.SelectedPath + "/Reporte.pdf", FileFormat.PDF);
+                    MessageBox.Show("El documento ha sido almacenado en: " + folderDlg.SelectedPath + "/Reporte.pdf");
+                }
+                catch
+                {
+                    MessageBox.Show("No fue posible guardar el PDF, es posible que se encuentre abierto por otra aplicacion");
+                }
+            }
+            
+
         }
 
         private void btnClean_Click(object sender, EventArgs e)
